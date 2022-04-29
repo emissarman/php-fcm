@@ -73,6 +73,20 @@ class Client implements ClientInterface
             ]
         );
     }
+    
+    public function sendAsync(Message $message)
+    {
+        return $this->guzzleClient->postAsync(
+            $this->getApiUrl(),
+            [
+                'headers' => [
+                    'Authorization' => sprintf('key=%s', $this->apiKey),
+                    'Content-Type' => 'application/json'
+                ],
+                'body' => json_encode($message)
+            ]
+        );
+    }
 
     private function getApiUrl()
     {
